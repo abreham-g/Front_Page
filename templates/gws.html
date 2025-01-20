@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWS Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+         /* Adjust the text area width to 50% and set its height */
+         .form-control {
+            width: 50%;
+            max-width: 100%; /* Ensure it doesn't exceed the container width */
+            height: 200px; /* Set the height of the text area */
+        }
+        /* Adjust Retailer link text areas */
+        .retailer-link {
+            max-width: 25%;
+            height: 50px;
+        }
+
+        /* Custom blue color for the navbar */
+        .navbar {
+            background-color: #007bff; /* Custom blue */
+        }
+        /* Make text inside the navbar white */
+        .navbar .navbar-brand, 
+        .navbar .nav-link {
+            color: white !important;
+        }
+        /* Space between icons and text */
+        .nav-link i {
+            margin-right: 5px;
+        }
+        /* Footer styling */
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        /* Larger paragraph styling */
+        .large-paragraph {
+            font-size: 1.25rem; /* Larger font size */
+            line-height: 1.8; /* Increase line height for better readability */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">FUNONTHEGO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/insert"><i class="bi bi-house"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sfs"><i class="bi bi-shop"></i> SFS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gws"><i class="bi bi-cart"></i> GWS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="bi bi-grid-3x3"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="/logout" class="d-flex">
+                            <button type="submit" class="nav-link btn btn-link text-white">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   
+    <div class="container mt-5">
+        <h4>Games Work Shop</h4>
+        
+        <!-- Form for ASIN input and buttons -->
+        <form method="POST" action="/insert" class="mt-3">
+            <div class="mb-3">
+                <label for="asin" class="form-label">The ASIN For GWS</label>
+                <textarea id="asin" name="asin" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="retailer-link-1" class="form-label">Retailer Links 1 </label>
+                <textarea id="retailer-link-1" name="retailer_link_1" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="retailer-link-2" class="form-label">Retailer Links 2</label>
+                <textarea id="retailer-link-2" name="retailer_link_2" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="retailer-link-3" class="form-label">Retailer Links 3</label>
+                <textarea id="retailer-link-3" name="retailer_link_3" class="form-control" required></textarea>
+            </div>
+            
+            <!-- Buttons aligned on the same line -->
+            <div class="d-flex justify-content-start gap-2">
+                <button type="submit" class="btn btn-primary">Insert</button>
+                <form method="POST" action="/clear_data" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Clear ASIN</button>
+                </form>
+            </div>
+        </form>
+
+    
+        <!-- Flash messages -->
+        <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="list-group">
+                    {% for category, message in messages %}
+                        <li class="list-group-item list-group-item-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <br>
+        <br>
+    </div>
+    
+
+
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/sfs">SFS</a></li>
+                        <li><a href="/gws">GWS</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: support@funonthego.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                    <p>Address: 123 Fun Street, Go City</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="https://linkedin.com" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <p>&copy; 2025 FUNONTHEGO. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
